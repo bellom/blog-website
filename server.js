@@ -8,15 +8,16 @@ mongoose.connect('mongodb://localhost/blog', {
   useUnifiedTopology: true
 })
 
+app.use(express.urlencoded({ extended: false }))
 app.set('view engine', 'ejs')
-
-app.use('/articles', articlesRouter)
 
 app.get('/', (req, res) => {
   const articles = [{
     title: "my title"
   }]
   res.render('articles/index', { articles: articles})
-})
+}) 
+
+app.use('/articles', articlesRouter)
 
 app.listen(5000)
